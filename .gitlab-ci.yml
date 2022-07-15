@@ -7,4 +7,9 @@ build-job:       # This job runs in the build stage, which runs first.
   script:
     - echo "React Build started"
     - node -v
+    - npm install
+    - npm run build
     - echo "React Build completed"
+  artifacts:
+    path:
+      - build

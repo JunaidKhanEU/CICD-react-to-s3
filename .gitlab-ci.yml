@@ -1,6 +1,7 @@
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
+  - deploy
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -25,4 +26,14 @@ test-job:
     - serve -s build &
     - sleep 10
     - curl http://localhost:3000 | grep "React App"
+    - echo "React Test completed"
+
+deploy-to-s3:
+  stage: deploy
+  image: 
+    name: amazon/aws-cli:2.4
+    entrypoint: [""]
+  script:
+    - echo "React Test started"
+    - aws --version
     - echo "React Test completed"

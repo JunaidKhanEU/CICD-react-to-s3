@@ -17,7 +17,12 @@ build-job:       # This job runs in the build stage, which runs first.
 
 test-job:
   stage: test
+  image: node:16.16.0-alpine
   script:
     - echo "React Test started"
-    - node -v
+    - npm install -g serve
+    - apk add curl
+    - serve -s build
+    - sleep 10
+    - curl http://localhost:3000 | grep "React App"
     - echo "React Test completed"

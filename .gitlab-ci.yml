@@ -3,7 +3,7 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
+.build-job:       # This job runs in the build stage, which runs first.
   stage: build
   image: node:16.16.0-alpine
   script:
@@ -16,7 +16,7 @@ build-job:       # This job runs in the build stage, which runs first.
     paths:
       - build
 
-test-job:
+.test-job:
   stage: test
   image: node:16.16.0-alpine
   script:
@@ -36,4 +36,6 @@ deploy-to-s3:
   script:
     - echo "React Test started"
     - aws --version
+    - echo "Hello World" > test.txt
+    - aws s3 cp test.txt s3://gitlab-tut/test.txt --recursive
     - echo "React Test completed"

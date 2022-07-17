@@ -34,11 +34,11 @@ deploy-to-s3:
     name: amazon/aws-cli:2.5.6
     entrypoint: [""]
   rules:
-    - if: $CI_COMMIT_REF_NAME == CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
     - echo "React Test started"
     - echo $CI_DEFAULT_BRANCH is a default branch of this project
-    - echo $CI_COMMIT_REF_NAME branch is building
+    - echo $CI_COMMIT_REF_NAME branch is buildings
     - aws --version
     - aws s3 sync build s3://$S3_BUCKET --delete
     - echo "React Test completed"
